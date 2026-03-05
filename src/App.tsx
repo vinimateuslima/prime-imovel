@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './app/routes'
 import { Bounce, ToastContainer } from 'react-toastify'
+import { LoadingProvider } from './contexts/LoadingContext'
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         theme="light"
         transition={Bounce}
       />
-      <AppRoutes />
+      <LoadingProvider>
+        <AppRoutes />
+      </LoadingProvider>
     </BrowserRouter>
   )
 }

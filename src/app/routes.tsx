@@ -3,6 +3,7 @@ import Login from "../pages/Login/Login";
 import Layout from "../pages/Layout/Layout";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "./PrivateRoute";
+import Cadastro from "../pages/Cadastro/Cadastro";
 
 export function AppRoutes() {
     return (
@@ -13,6 +14,7 @@ export function AppRoutes() {
                 </Route>
             </Route>
             <Route path="/login" element={<Login />} />
+             <Route path="/cadastro" element={<Cadastro />} />
 
         </Routes>
     );

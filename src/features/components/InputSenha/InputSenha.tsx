@@ -14,6 +14,7 @@ interface InputTextoProps {
   obrigatorio?: boolean;
   submitOcorreu?: boolean;
   mensagemErro: string;
+  esqueceuSenhaLink?: boolean;
 }
 
 const InputSenha = (props: InputTextoProps) => {
@@ -24,9 +25,9 @@ const InputSenha = (props: InputTextoProps) => {
           <label>{props.label}</label>
           {props.obrigatorio && <span className="obrigatorio">*</span>}
         </div>
-        <div className="label-senha">
+        {props.esqueceuSenhaLink && <div className="label-senha">
           <a href="/esqueci-senha">Esqueceu a senha?</a>
-        </div>
+        </div>}
       </div>
       <input
         type={"text"}

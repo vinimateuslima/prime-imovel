@@ -22,11 +22,18 @@ export function validandoInputVazioEMinimo(valor: string, setControlador: Functi
   } else {
     if (valor.length < minimo) {
       setControlador(false)
-      setMensagemErro(`O campo de ${nome} deve conter no mínimo ${minimo} caracteres`)
+      setMensagemErro(`O campo ${nome} deve conter no mínimo ${minimo} caracteres`)
       return
     }
     setControlador(true)
   }
+}
+
+export function Max255Caracteres(valor: string): boolean {
+  if (valor.length <= 255) {
+    return true;
+  }
+  return false;
 }
 
 export function Max100Caracteres(valor: string): boolean {
