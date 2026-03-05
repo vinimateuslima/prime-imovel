@@ -1,0 +1,39 @@
+.login {
+    min-height: 100vh;
+
+}
+
+.form-login-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-login-group label {
+    text-align: left;
+}
+
+.form-login-group .form-control {
+
+    padding: 0.50rem 0.75rem 0.50rem 2.5rem;
+    border-radius: 8px;
+    border: 1px solid #E0E5EB;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s ease;
+}
+
+.form-login-group .icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 70%;
+    transform: translateY(-50%);
+    color: #64748B;
+    pointer-events: none;
+}
+
+.label-senha-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

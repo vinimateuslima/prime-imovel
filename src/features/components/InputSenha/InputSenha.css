@@ -1,0 +1,44 @@
+.inputSenha-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.label-senha-container{
+    display: flex;
+    gap: 5px;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.label-senha-container label{
+    margin-bottom: 5px;
+}
+
+
+.texto-obrigatorio {
+    text-align: left;
+    color: #E74C3C;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.inputSenha {
+    padding: 0.50rem 0.75rem 0.50rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #E0E5EB;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s ease;
+}
+
+.inputSenha.bordaVermelha {
+    border: 1px solid #E74C3C!important;
+}
+
+.inputSenha.bordaVerde {
+    border: 1px solid #27AE60!important;
+}
+
+.obrigatorio {
+    color: red;
+}
