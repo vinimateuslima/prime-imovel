@@ -100,11 +100,15 @@ const Home = () => {
 
   }
 
-  function listarImoveis(name?: string) {
+  function listarImoveis() {
     console.log("page ", page);
 
+    const query = `?page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
+
+    console.log("Query ", query);
+    
     setLoading(true)
-    apiController.get(`/property?page=${page}&size=${size}&name=${name}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`).then(response => {
+    apiController.get(`/property${query}`).then(response => {
       console.log("resposta ", response)
       setLoading(false)
       setDadosImoveis(response.content)
@@ -127,7 +131,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       mudarParametro()
-      listarImoveis(nome)
+      listarImoveis()
       console.log("Nome ", nome);
       
     }, 1000);
