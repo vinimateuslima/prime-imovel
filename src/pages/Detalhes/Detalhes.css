@@ -1,0 +1,50 @@
+.detalhes-container .img-imovel {
+    border-radius: 10px;
+}
+
+.detalhes-container .tipo {
+    font-size: 1em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.detalhes-container .tipo-status .status {
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: default;
+}
+
+.tag-ativo {
+    background-color: #28A958;
+}
+
+.tag-inativo {
+    background-color: #C53B3A;
+}
+
+.detalhes-container .valor {
+  font-size: 2.2em;
+    font-weight: bold;
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+}
+
+.detalhes-container .voltar .btn-voltar{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 50px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: transform ease 0.5s;
+    background: none;
+    border: none;
+}
+
+.detalhes-container .voltar .btn-voltar:hover {
+   transform: scale(1.1);
+   box-shadow: none;
+}

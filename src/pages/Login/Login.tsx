@@ -127,7 +127,7 @@ const Login = () => {
             {/* <IoLockClosedOutline className='icon' /> */}
             <InputSenha label='Senha' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} placeholder='Digite sua senha' controlador={controlPassword} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroPassword} esqueceuSenhaLink />
           </div>
-          <Botao nome='Entrar' type='button' onClick={Login} />
+          <Botao type='button' onClick={Login}> Entrar</Botao>
           <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
         </FormBasico>
 

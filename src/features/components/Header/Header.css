@@ -6,3 +6,21 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     
 }
+
+.btn-entrar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-entrar:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+
+}

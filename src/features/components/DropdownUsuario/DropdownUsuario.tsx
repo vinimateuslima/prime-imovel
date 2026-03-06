@@ -5,7 +5,11 @@ import { FaHeart, FaUser, FaSignOutAlt, FaBuilding, FaRegUserCircle } from "reac
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-function DropdownUsuario() {
+interface DropdownUsuarioProps {
+    name: string;
+}
+
+function DropdownUsuario(props: DropdownUsuarioProps) {
     const [open, setOpen] = useState(false);
 
     // Ferramentas
@@ -44,7 +48,7 @@ function DropdownUsuario() {
             <div className="dropdown" onClick={() => setOpen(!open)} ref={dropdownRef}>
                 <div className="dropdown-background d-flex gap-2">
                     <FaRegUserCircle className='avatar' />
-                    <button>Vinicius</button>
+                    <button>{props.name}</button>
                 </div>
 
 

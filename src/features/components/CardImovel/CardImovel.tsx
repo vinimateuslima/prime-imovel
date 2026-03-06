@@ -53,7 +53,7 @@ const CardImovel = (props: CardImovelProps) => {
 
                 <div className="card-imovel-footer d-flex justify-content-between">
                     <p className='valor'>R$ {props.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    <a href={props.link} target="_blank" rel="noopener noreferrer">
+                    <a href={props.link} target="_self" rel="noopener noreferrer">
                         Ver detalhes
                     </a>
                 </div>

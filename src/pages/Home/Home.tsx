@@ -11,7 +11,7 @@ import InputTexto from '../../features/components/InputTexto/InputTexto'
 import Botao from '../../features/components/Botao/Botao'
 import { apenasNumeros, validandoInput } from '../../features/Util'
 
-interface Propriedade {
+export interface Propriedade {
   "id": number,
   "name": string,
   "description": string,
@@ -30,7 +30,7 @@ interface Propriedade {
 
 const Home = () => {
 
-  const [searchParams, setSearchParams] = useSearchParams({ page: "0", size: "10" });
+  const [searchParams, setSearchParams] = useSearchParams({sort: "id", page: "0", size: "10" });
 
 
   const [dadosImoveis, setDadosImoveis] = useState<Propriedade[]>([])
@@ -104,7 +104,7 @@ const Home = () => {
   function listarImoveis() {
     console.log("page ", page);
 
-    const query = `?page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
+    const query = `?sort=id&page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
 
     console.log("Query ", query);
     
@@ -125,7 +125,15 @@ const Home = () => {
 
   useEffect(() => {
     listarImoveis()
+  const params = new URLSearchParams(searchParams)
+    
+    if (size) {
+      params.set("size", size.toString())
+    } else {
+      params.delete("size")
+    }
 
+     setSearchParams(params)
 
   }, [page, size])
 
@@ -162,12 +170,19 @@ const Home = () => {
           <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => validandoInput(e, setPrecoMin, apenasNumeros)} />
           <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => validandoInput(e, setPrecoMax, apenasNumeros)} />
           <InputTexto value={quartos} placeholder='Qtd Quartos' onChange={(e) => validandoInput(e, setQuartos, apenasNumeros)} />
-          <Botao nome='Filtrar' className='botaoFiltro' onClick={mudarParametro} />
+          <Botao className='botaoFiltro' onClick={mudarParametro}> Filtrar </Botao>
         </div>
       </div>
 
 
-      <h4>Imóveis em destaque</h4>
+      <div className="header-grid">
+        <h4>Imóveis em destaque</h4>
+        <select className='tamanho' value={size} onChange={(e) => setSize(e.target.value)}>
+          <option value={10}>10 por página</option>
+          <option value={20}>20 por página</option>
+          <option value={50}>50 por página</option>
+        </select>
+      </div>
       <div className="card-grid">
         {
           dadosImoveis?.map(propriedade => (
@@ -181,7 +196,7 @@ const Home = () => {
               quartos={propriedade.bedrooms} 
               area={propriedade.area} 
               valor={propriedade.value} 
-              link={''}
+              link={`/detalhes?id=${propriedade.id}`}
               imagemUrl={propriedade.imageUrls}
             />
           ))

@@ -1,4 +1,3 @@
-import { CiMail } from 'react-icons/ci'
 import FormBasico from '../../features/components/FormBasico/FormBasico'
 import '../Login/Login.css'
 import { IoLockClosedOutline } from 'react-icons/io5'
@@ -125,7 +124,9 @@ const Cadastro = () => {
                         {/* <IoLockClosedOutline className='icon' /> */}
                         <InputSenha label='Senha' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} placeholder='Digite sua senha' controlador={controlPassword} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroPassword} />
                     </div>
-                    <Botao nome='Cadastrar' type='button' onClick={Cadastrar} />
+                    <Botao type='button' onClick={Cadastrar}>
+                        Cadastrar
+                    </Botao>
                     <p>Possui uma conta? <a href="/login">Faça login</a></p>
                 </FormBasico>
 

@@ -19,7 +19,7 @@ useEffect(() => {
    <div className="sessao-expirada container">
         <h1>Sessão Expirada</h1>
         <h5>Faça o login para acessar novamente.</h5>
-        <Botao nome='Fazer login' className='botaoLogin' onClick={() => {navigate('/login')}}/>
+        <Botao className='botaoLogin' onClick={() => {navigate('/login')}}>Fazer login</Botao>
    </div>
   )
 }

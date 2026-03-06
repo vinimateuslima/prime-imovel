@@ -17,6 +17,7 @@
     border: 1px solid #ccc;
     background: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .pagination button.active {
@@ -37,7 +38,7 @@
     border-radius: 10px;
 }
 
-.filtro-container select {
+.filtro-container select, .header-grid .tamanho {
     padding: 0.50rem 0.75rem 0.50rem 0.75rem;
     border-radius: 8px;
     border: 1px solid #E0E5EB;
@@ -80,4 +81,10 @@
     outline: var(--color-accent);
 
 
+}
+
+.header-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

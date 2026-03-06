@@ -1,17 +1,17 @@
 import './Botao.css'
 
 interface BotaoProps {
-    nome: string;
     onClick?: () => void;
     type?: 'button' | 'submit' | 'reset';
     className?: string
+    children?: React.ReactNode;
 }
 
 
 const Botao = (props: BotaoProps) => {
   return (
     <button type={props.type} className={`botao ${props.className}`} onClick={props.onClick}>
-      {props.nome}
+      {props.children}
     </button>
   )
 }
