@@ -107,7 +107,6 @@ const Login = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("token ", token);
 
     if (token) {
       navigate("/", { replace: true });

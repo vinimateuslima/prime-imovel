@@ -4,6 +4,7 @@ import Layout from "../pages/Layout/Layout";
 import Home from "../pages/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 import Cadastro from "../pages/Cadastro/Cadastro";
+import SessaoExpirada from "../pages/SessaoExpirada/SessaoExpirada";
 
 export function AppRoutes() {
     return (
@@ -15,6 +16,7 @@ export function AppRoutes() {
             </Route>
             <Route path="/login" element={<Login />} />
              <Route path="/cadastro" element={<Cadastro />} />
+             <Route path="/sessao-expirada" element={<SessaoExpirada />} />
 
         </Routes>
     );

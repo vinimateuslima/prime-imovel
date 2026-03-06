@@ -4,7 +4,7 @@ interface BotaoProps {
     nome: string;
     onClick?: () => void;
     type?: 'button' | 'submit' | 'reset';
-    className: string
+    className?: string
 }
 
 
