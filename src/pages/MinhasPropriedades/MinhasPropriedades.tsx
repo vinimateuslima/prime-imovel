@@ -70,6 +70,67 @@ const MinhasPropriedades = () => {
 
   }
 
+  function aoFechar() {
+    setAbrirModal(false)
+    limparCampos()
+
+  }
+
+  function aoExcluir(id: number) {
+
+    Swal.fire({
+      title: "Tem certeza que deseja excluir a propriedade?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Não",
+      confirmButtonColor: "#C9A227",
+      cancelButtonColor: "#0F172A"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setLoading(true)
+        apiController.delete(`/property/${id}`).then((response) => {
+
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Propriedade excluída com sucesso!',
+            icon: 'success',
+            confirmButtonColor: '#C9A227',
+            confirmButtonText: 'OK'
+          });
+
+          setLoading(false)
+          buscarPropriedadesUsuario()
+
+        }).catch((error) => {
+          setLoading(false)
+          console.log(error.message);
+          Swal.fire({
+            icon: "error",
+            title: "Opa",
+            text: `${error.response.data.message}`,
+
+          });
+
+        })
+
+      }
+
+    })
+  }
+
+  function limparCampos() {
+    setId("")
+    setName("")
+    setDescription("")
+    setType("")
+    setValue("")
+    setArea("")
+    setBedrooms("")
+    setAddress("")
+    setState("")
+    setCity("")
+  }
 
   function buscarPropriedadesUsuario() {
     setLoading(true)
@@ -131,7 +192,12 @@ const MinhasPropriedades = () => {
         }).catch((error) => {
           setLoading(false)
           console.log(error.message);
+          Swal.fire({
+            icon: "error",
+            title: "Opa",
+            text: `${error.response.data.message}`,
 
+          });
         })
 
       }
@@ -149,12 +215,12 @@ const MinhasPropriedades = () => {
 
   return (
     <>
-      <div className=" container mt-5">
+      <div className=" container mt-5 mb-5">
         <h2 className='mb-4'>Minhas Propriedades</h2>
-        <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={() => { }} />
+        <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={aoExcluir} />
       </div>
 
-      <ModalPadrao aberto={abrirModal} aoFechar={() => setAbrirModal(false)} className='modalEditarPropriedade'>
+      <ModalPadrao aberto={abrirModal} aoFechar={() => aoFechar()} className='modalEditarPropriedade'>
         <InputTexto label='Nome' value={name} onChange={(e) => validandoInput(e, setName, Max100Caracteres)} controlador={controlName} mensagemErro={mensagemErroName} submitOcorreu={submitOcorreu} />
         <div className="descricao">
           <label className='mb-2 mt-1'>Descrição</label>

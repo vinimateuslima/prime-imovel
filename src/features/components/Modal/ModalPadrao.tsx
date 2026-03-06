@@ -1,3 +1,4 @@
+import { IoClose } from "react-icons/io5";
 import "./ModalPadrao.css";
 
 type Props = {
@@ -11,10 +12,10 @@ function ModalPadrao({ aberto, aoFechar, children, className }: Props) {
   if (!aberto) return null;
 
   return (
-    <div className={`${className} modal-overlay`} onClick={aoFechar}>
+    <div className={`${className} modal-overlay`}>
       <div className="modal-conteudo" onClick={(e) => e.stopPropagation()}>
         <button className="modal-fechar" onClick={aoFechar}>
-          ×
+          <IoClose />
         </button>
 
         {children}
