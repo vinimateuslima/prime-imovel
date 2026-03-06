@@ -65,7 +65,7 @@ function DropdownUsuario(props: DropdownUsuarioProps) {
                         Minha Conta
                     </div>
 
-                    <div className="item">
+                    <div className="item" onClick={()=> navigate("/minhas-propriedades")}>
                         <FaBuilding />
                         Minhas Propriedades
                     </div>

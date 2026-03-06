@@ -6,6 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import SessaoExpirada from "../pages/SessaoExpirada/SessaoExpirada";
 import Detalhes from "../pages/Detalhes/Detalhes";
+import MinhasPropriedades from "../pages/MinhasPropriedades/MinhasPropriedades";
 
 export function AppRoutes() {
     return (
@@ -13,10 +14,11 @@ export function AppRoutes() {
             <Route element={<Layout />}>
                 <Route element={<PrivateRoute />}>
                     <Route path="/" element={<Home />} />
-
+                    <Route path="/detalhes" element={<Detalhes />} />
+                    <Route path="/minhas-propriedades" element={<MinhasPropriedades />} />
                 </Route>
 
-                <Route path="/detalhes" element={<Detalhes />} />
+
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />

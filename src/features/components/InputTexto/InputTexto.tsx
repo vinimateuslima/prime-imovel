@@ -12,6 +12,7 @@ interface InputTextoProps {
     obrigatorio?: boolean;
     submitOcorreu?: boolean;
     mensagemErro?: string;
+    isMoeda?: boolean;
 }
 
 const InputTexto = (props: InputTextoProps) => {
@@ -25,7 +26,7 @@ const InputTexto = (props: InputTextoProps) => {
       }
      <input 
       type={"text"} 
-      value={props.value} 
+      value={`${props.isMoeda ? "R$ " : ""}${props.value}`} 
       onChange={props.onChange} 
       placeholder={props.placeholder}
       className={`inputTexto ${props.className} ${props.submitOcorreu ?  props.controlador == false ? 'bordaVermelha' : 'bordaVerde' : ''}`}

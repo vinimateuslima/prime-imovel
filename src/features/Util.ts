@@ -64,3 +64,48 @@ export function apenasNumeros(valor: string): boolean {
 
   return true;
 }
+
+export function formatarValor(e: ChangeEvent<HTMLInputElement, HTMLInputElement>, setState: Function) {
+
+let valor = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+
+  if (!valor) {
+    setState("");
+    return;
+  }
+
+  const numero = Number(valor) / 100;
+
+  setState(numero.toFixed(2));
+}
+
+export const estadosBrasil = [
+  "AC",
+  "AL",
+  "AP",
+  "AM",
+  "BA",
+  "CE",
+  "DF",
+  "ES",
+  "GO",
+  "MA",
+  "MT",
+  "MS",
+  "MG",
+  "PA",
+  "PB",
+  "PR",
+  "PE",
+  "PI",
+  "RJ",
+  "RN",
+  "RS",
+  "RO",
+  "RR",
+  "SC",
+  "SP",
+  "SE",
+  "TO"
+];
+

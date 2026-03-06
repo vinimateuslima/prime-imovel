@@ -1,0 +1,14 @@
+.tipos {
+     padding: 0.50rem 0.75rem 0.50rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #E0E5EB;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+ .tipos:focus {
+
+    border: 1px solid var(--color-accent);
+    outline: var(--color-accent);
+ }

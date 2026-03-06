@@ -1,0 +1,56 @@
+.tabela-container {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+
+.tabela-propriedades {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-propriedades thead {
+    background: #f3f4f6;
+}
+
+.tabela-propriedades th {
+    text-align: left;
+    padding: 14px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.tabela-propriedades td {
+    padding: 14px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.preco {
+    color: #d97706;
+    font-weight: 500;
+}
+
+.acoes {
+    text-align: right;
+    display: flex;
+}
+
+.icone {
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.icone:hover {
+    transform: scale(1.1);
+}
+
+.editar {
+    color: #4b5563;
+}
+
+.excluir {
+    color: #4b5563;
+}

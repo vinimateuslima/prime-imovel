@@ -10,6 +10,7 @@ import { useLoading } from '../../contexts/LoadingContext'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
 import Botao from '../../features/components/Botao/Botao'
 import { apenasNumeros, validandoInput } from '../../features/Util'
+import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
 
 export interface Propriedade {
   "id": number,
@@ -30,7 +31,7 @@ export interface Propriedade {
 
 const Home = () => {
 
-  const [searchParams, setSearchParams] = useSearchParams({sort: "id", page: "0", size: "10" });
+  const [searchParams, setSearchParams] = useSearchParams({ sort: "id", page: "0", size: "10" });
 
 
   const [dadosImoveis, setDadosImoveis] = useState<Propriedade[]>([])
@@ -43,7 +44,7 @@ const Home = () => {
   const [nome, setNome] = useState(searchParams.get("name") || "");
   const [totalPages, setTotalPages] = useState(0);
 
-    const [pesquisaDebounce, setPesquisaDebounce] = useState("");
+  const [pesquisaDebounce, setPesquisaDebounce] = useState("");
 
 
 
@@ -107,7 +108,7 @@ const Home = () => {
     const query = `?sort=id&page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
 
     console.log("Query ", query);
-    
+
     setLoading(true)
     apiController.get(`/property${query}`).then(response => {
       console.log("resposta ", response)
@@ -125,15 +126,15 @@ const Home = () => {
 
   useEffect(() => {
     listarImoveis()
-  const params = new URLSearchParams(searchParams)
-    
+    const params = new URLSearchParams(searchParams)
+
     if (size) {
       params.set("size", size.toString())
     } else {
       params.delete("size")
     }
 
-     setSearchParams(params)
+    setSearchParams(params)
 
   }, [page, size])
 
@@ -142,7 +143,7 @@ const Home = () => {
       mudarParametro()
       listarImoveis()
       console.log("Nome ", nome);
-      
+
     }, 1000);
 
     return () => {
@@ -154,18 +155,13 @@ const Home = () => {
   return (
     <div className="container p-5">
       <div className='searchBar-container d-flex justify-content-center'><div className="searchBar d-flex justify-content-between align-items-end gap-2">
-        <input value={nome} onChange={(e) => setNome(e.target.value)} type="search" name="" id="" placeholder='Pesquise um imóvel' /> 
+        <input value={nome} onChange={(e) => setNome(e.target.value)} type="search" name="" id="" placeholder='Pesquise um imóvel' />
 
-        </div>
-        </div>
+      </div>
+      </div>
       <div className="filtro-container d-flex justify-content-center">
         <div className="filtro d-flex justify-content-between align-items-end gap-2">
-          <select name="type" id="" className='tipos' value={tipo} onChange={(e) => setTipo(e.target.value)}>
-            <option value=""></option>
-            <option value="CASA">CASA</option>
-            <option value="TERRENO">TERRENO</option>
-            <option value="APARTAMENTO">APARTAMENTO</option>
-          </select>
+          <SelectTipo tipo={tipo} onChange={(e) => setTipo(e.target.value)} />
 
           <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => validandoInput(e, setPrecoMin, apenasNumeros)} />
           <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => validandoInput(e, setPrecoMax, apenasNumeros)} />
@@ -187,15 +183,15 @@ const Home = () => {
         {
           dadosImoveis?.map(propriedade => (
             <CardImovel
-              key={propriedade.id} 
-              titulo={propriedade.name} 
+              key={propriedade.id}
+              titulo={propriedade.name}
               cidade={propriedade.city}
               estado={propriedade.state}
               tipo={propriedade.type}
               status={propriedade.active}
-              quartos={propriedade.bedrooms} 
-              area={propriedade.area} 
-              valor={propriedade.value} 
+              quartos={propriedade.bedrooms}
+              area={propriedade.area}
+              valor={propriedade.value}
               link={`/detalhes?id=${propriedade.id}`}
               imagemUrl={propriedade.imageUrls}
             />

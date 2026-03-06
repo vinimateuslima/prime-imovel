@@ -1,0 +1,12 @@
+.modalEditarPropriedade .descricao{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.modalEditarPropriedade .modal-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
