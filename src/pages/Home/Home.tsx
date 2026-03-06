@@ -9,6 +9,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useLoading } from '../../contexts/LoadingContext'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
 import Botao from '../../features/components/Botao/Botao'
+import { apenasNumeros, validandoInput } from '../../features/Util'
 
 interface Propriedade {
   "id": number,
@@ -158,9 +159,9 @@ const Home = () => {
             <option value="APARTAMENTO">APARTAMENTO</option>
           </select>
 
-          <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => setPrecoMin(e.target.value)} />
-          <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => setPrecoMax(e.target.value)} />
-          <InputTexto value={quartos} placeholder='Qtd Quartos' onChange={(e) => setQuartos(e.target.value)} />
+          <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => validandoInput(e, setPrecoMin, apenasNumeros)} />
+          <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => validandoInput(e, setPrecoMax, apenasNumeros)} />
+          <InputTexto value={quartos} placeholder='Qtd Quartos' onChange={(e) => validandoInput(e, setQuartos, apenasNumeros)} />
           <Botao nome='Filtrar' className='botaoFiltro' onClick={mudarParametro} />
         </div>
       </div>

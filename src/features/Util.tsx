@@ -49,3 +49,18 @@ export function Max2147483647Caracteres(valor: string): boolean {
   }
   return false;
 }
+
+export function apenasNumeros(valor: string): boolean {
+  const regex = /^[0-9]*$/;
+
+  if (!regex.test(valor)) return false;
+
+  const numero = Number(valor);
+  
+
+  if (numero < 0 ) return false;
+
+  if (numero > 10000000) return false;
+
+  return true;
+}
