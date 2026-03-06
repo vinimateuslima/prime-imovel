@@ -8,6 +8,7 @@
   --color-text-muted: #64748B;
 }
 
+
 * {
   margin: 0;
   padding: 0;
@@ -49,12 +50,12 @@ input {
 }
 
 a {
-  text-decoration: none!important;
-  color: var(--color-accent)!important;
+  text-decoration: none !important;
+  color: var(--color-accent) !important;
 }
 
 a:hover {
-  text-decoration: underline!important;
+  text-decoration: underline !important;
 }
 
 ul,
@@ -62,7 +63,12 @@ ol {
   list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   color: var(--color-text);
 }
