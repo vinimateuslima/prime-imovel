@@ -8,19 +8,21 @@ interface InputTextoProps {
     placeholder?: string;
     className?: string;
     controlador?: boolean;
-    label: string;
+    label?: string;
     obrigatorio?: boolean;
     submitOcorreu?: boolean;
-    mensagemErro: string;
+    mensagemErro?: string;
 }
 
 const InputTexto = (props: InputTextoProps) => {
   return (
    <div className="inputTexto-container">
+      {props.label && 
       <div className="label-container"> 
         <label>{props.label}</label>
         {props.obrigatorio && <span className="obrigatorio">*</span>}
       </div>
+      }
      <input 
       type={"text"} 
       value={props.value} 

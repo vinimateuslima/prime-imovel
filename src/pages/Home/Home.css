@@ -1,0 +1,83 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #c99a2c;
+    color: white;
+}
+
+.filtro-container {
+    width: 100%;
+    margin-bottom: 50px;
+
+}
+
+.filtro {
+    width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.filtro-container select {
+    padding: 0.50rem 0.75rem 0.50rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #E0E5EB;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s ease;
+}
+
+.filtro-container select:focus {
+
+    border: 1px solid var(--color-accent);
+    outline: var(--color-accent);
+
+}
+
+.searchBar-container {
+    width: 100%;
+    margin-bottom: 10px;
+
+}
+
+.searchBar {
+    width: 1000px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 0.50rem 0.75rem 0.50rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #E0E5EB;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s ease;
+
+}
+
+.searchBar input:focus {
+    border: 1px solid var(--color-accent);
+    outline: var(--color-accent);
+
+
+}
