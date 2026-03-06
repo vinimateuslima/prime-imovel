@@ -17,10 +17,27 @@
     align-items: center;
 }
 
-.card-imovel-top .tag-ativo {
-    background-color: var(--color-accent);
+.card-imovel-top .tags {
+    display: flex;
+    gap: 10px;
+}
+
+.tag-ativo {
+    background-color: #28A958;
+}
+
+.tag-inativo {
+    background-color: #C53B3A;
+}
+
+.card-imovel-top .tags .tipo {
+    background-color: var(--color-primary);
+}
+
+.card-imovel-top .tags span {
+    justify-content: space-between;
     color: #fff;
-    padding: 5px 20px;
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.9em;
     cursor: default;
@@ -47,7 +64,7 @@
 
 .card-imovel img {
     width: 100%;
-    height: auto;
+    height: 291px;
     display: block;
 }
 

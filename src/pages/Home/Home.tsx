@@ -171,7 +171,17 @@ const Home = () => {
         {
           dadosImoveis?.map(propriedade => (
             <CardImovel
-              key={propriedade.id} titulo={propriedade.name} localizacao={propriedade.address} quartos={propriedade.bedrooms} area={propriedade.area} valor={propriedade.value} link={''}
+              key={propriedade.id} 
+              titulo={propriedade.name} 
+              cidade={propriedade.city}
+              estado={propriedade.state}
+              tipo={propriedade.type}
+              status={propriedade.active}
+              quartos={propriedade.bedrooms} 
+              area={propriedade.area} 
+              valor={propriedade.value} 
+              link={''}
+              imagemUrl={propriedade.imageUrls}
             />
           ))
         }

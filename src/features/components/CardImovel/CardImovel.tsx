@@ -6,11 +6,15 @@ import { useState } from 'react'
 
 interface CardImovelProps {
     titulo: string
-    localizacao: string
     quartos: number
     area: number
     valor: number
-    link: string
+    link: string,
+    cidade: string,
+    estado: string,
+    tipo: string,
+    status: boolean;
+    imagemUrl?: string
 }
 
 const CardImovel = (props: CardImovelProps) => {
@@ -21,24 +25,32 @@ const CardImovel = (props: CardImovelProps) => {
     return (
         <div className="card-imovel">
             <div className="card-imovel-top d-flex justify-content-between">
-                <span className="tag-ativo">Ativo</span>
+                <div className="tags">
+                    <span className='tipo'>{props.tipo}</span>
+                    <span className={props.status ? "tag-ativo" : "tag-inativo"}>
+                        {props.status ? "Ativo" : "Inativo"}
+                    </span>
+                </div>
                 <button className="favorito" onClick={() => setFavorito(!favorito)}>
-                    {favorito ? <FaHeart /> : <FaRegHeart />}
+                    {favorito ? <FaHeart  color='#C9A227'/> : <FaRegHeart />}
                 </button>
             </div>
-            <img src="https://placehold.co/388x291" alt="" />
+            <img src={props.imagemUrl || "https://placehold.co/388x291"} alt="" />
             <div className="card-imovel-body">
                 <h5 className='titulo'>{props.titulo}</h5>
                 <div className="local d-flex gap-1">
                     <CiLocationOn />
 
-                    <p>{props.localizacao}</p>
+                    <p>{props.cidade} - {props.estado}</p>
                 </div>
+
+
                 <div className="quartos d-flex gap-1">
                     <MdOutlineBed />
                     <p>{props.quartos} quartos</p>
                     <p>{props.area} m²</p>
                 </div>
+
                 <div className="card-imovel-footer d-flex justify-content-between">
                     <p className='valor'>R$ {props.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                     <a href={props.link} target="_blank" rel="noopener noreferrer">
