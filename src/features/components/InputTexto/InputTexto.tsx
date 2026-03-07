@@ -31,10 +31,12 @@ const InputTexto = (props: InputTextoProps) => {
       placeholder={props.placeholder}
       className={`inputTexto ${props.className} ${props.submitOcorreu ?  props.controlador == false ? 'bordaVermelha' : 'bordaVerde' : ''}`}
     />
- {props.submitOcorreu && !props.controlador && (
+      {props.submitOcorreu && <div className="texto-obrigatorio-container">
+   {props.submitOcorreu && !props.controlador && (
   <span className="texto-obrigatorio">
-    {props.mensagemErro}
+    {props.mensagemErro ? props.mensagemErro : "Campo obrigatório"}
   </span>)}
+</div>}
    </div>
   )
 }

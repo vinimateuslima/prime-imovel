@@ -8,7 +8,7 @@ export function validandoInput(event: ChangeEvent<HTMLInputElement, HTMLInputEle
 }
 
 export function validarInputVazio(valor: string, setControlador: Function) {
-  if (valor.trim() === '') {
+  if (valor.toString().trim() === '') {
     setControlador(false)
   } else {
     setControlador(true)

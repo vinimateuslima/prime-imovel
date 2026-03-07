@@ -88,3 +88,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.botaoFiltro {
+    width: 150px;
+}

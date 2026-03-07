@@ -39,14 +39,10 @@
 
 }
 
-.inputTexto.bordaVermelha {
-    border: 1px solid #E74C3C!important;
-}
-
-.inputTexto.bordaVerde {
-    border: 1px solid #27AE60!important;
-}
-
 .obrigatorio {
     color: red;
+}
+
+.texto-obrigatorio-container {
+    height: 18px;
 }

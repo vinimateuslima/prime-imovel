@@ -108,7 +108,8 @@ const Cadastro = () => {
 
     return (
 
-        <div className="login text-center  row justify-content-center align-items-center login-container">
+       <div className="container">
+         <div className="login text-center  row justify-content-center align-items-center login-container">
             <div className="col-12 d-flex justify-content-center">
 
                 <FormBasico title='Cadastro' description='Crie sua conta para acessar o portal'>
@@ -132,6 +133,7 @@ const Cadastro = () => {
 
             </div>
         </div>
+       </div>
     )
 }
 

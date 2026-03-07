@@ -59,6 +59,14 @@ textarea:focus {
   outline: var(--color-accent);
 }
 
+.bordaVermelha {
+    border: 1px solid #E74C3C!important;
+}
+
+.bordaVerde {
+    border: 1px solid #27AE60!important;
+}
+
 input {
   border: none;
   outline: none;

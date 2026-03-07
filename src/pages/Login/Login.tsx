@@ -115,7 +115,8 @@ const Login = () => {
 
   return (
 
-    <div className="login text-center row justify-content-center align-items-center login-container">
+    <div className="container">
+      <div className="login text-center row justify-content-center align-items-center login-container">
       <div className="col-12 d-flex justify-content-center">
 
         <FormBasico title='Login' description='Faça login para acessar sua conta'>
@@ -132,6 +133,7 @@ const Login = () => {
         </FormBasico>
 
       </div>
+    </div>
     </div>
   )
 }

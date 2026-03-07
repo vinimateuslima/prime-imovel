@@ -1,0 +1,12 @@
+.textoArea-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.textoArea {
+  min-height: 120px;
+  resize: vertical;
+  padding: 8px;
+  font-family: inherit;
+}
