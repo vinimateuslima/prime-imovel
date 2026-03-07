@@ -101,6 +101,10 @@ p {
   color: var(--color-text-muted);
 }
 
+.texto-destaque {
+  color: var(--color-accent);
+}
+
 #root {
   min-height: 100vh;
 }

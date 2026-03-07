@@ -23,7 +23,7 @@ const SelectTipo = ({ tipo, onChange, temLabel, label, children, className }: Se
             <select name="type" id="" className='tipos' value={tipo} onChange={onChange}>
                 {children ? children :
                     (<>
-                        <option value=""></option>
+                        <option value="">Todos os tipos</option>
                         <option value="CASA">CASA</option>
                         <option value="TERRENO">TERRENO</option>
                         <option value="APARTAMENTO">APARTAMENTO</option>

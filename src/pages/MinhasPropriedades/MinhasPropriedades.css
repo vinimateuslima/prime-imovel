@@ -29,3 +29,7 @@
 .image-preview {
         width: 100px;
 }
+
+.inputCidade {
+    text-transform: capitalize;
+}

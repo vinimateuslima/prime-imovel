@@ -108,7 +108,7 @@ const CadastrarUsuario = () => {
             <div className="form-perfil">
                 <InputTexto label="Nome" placeholder='Nome da Silva' value={name} onChange={(e) => validandoInput(e, setName, Max100Caracteres)} controlador={controlName} submitOcorreu={submitOcorreu} mensagemErro={mensagemErroName} obrigatorio/>
                 <InputTexto label='E-mail' value={email} onChange={(e) => validandoInput(e, setEmail, Max100Caracteres)} placeholder='seu@email.com' controlador={controlEmail} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroEmail}/>
-                <InputSenha label="Nova senha" placeholder='Teste@123' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} controlador={controlPassword} mensagemErro={mensagemErroPassword} submitOcorreu={submitOcorreu} obrigatorio/>
+                <InputSenha label="Senha" placeholder='Teste@123' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} controlador={controlPassword} mensagemErro={mensagemErroPassword} submitOcorreu={submitOcorreu} obrigatorio/>
                 <SelectTipo label='Tipo' tipo={role} onChange={(e) => setRole(e.target.value)} temLabel>
                     <option value="CORRETOR">CORRETOR</option>
                     <option value="ADMIN">ADMIN</option>

@@ -116,6 +116,13 @@ export function formatarValor(e: ChangeEvent<HTMLInputElement, HTMLInputElement>
     return;
   }
 
+  console.log("Valor ", valor);
+  
+   if (valor == "00") {
+    setState("");
+    return;
+  }
+
   const numero = Number(valor) / 100;
 
   setState(numero.toFixed(2));

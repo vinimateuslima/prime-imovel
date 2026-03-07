@@ -8,7 +8,7 @@ import Botao from '../../features/components/Botao/Botao'
 import CardImovel from '../../features/components/CardImovel/CardImovel'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
 import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
-import { apenasNumeros, validandoInput } from '../../features/Util'
+import { apenasNumeros, formatarValor, validandoInput } from '../../features/Util'
 import './Home.css'
 
 export interface Propriedade {
@@ -56,6 +56,9 @@ const Home = () => {
     } else {
       params.delete("name")
     }
+
+    console.log("Tipo ", tipo);
+
 
     if (tipo) {
       params.set("type", tipo)
@@ -241,6 +244,16 @@ const Home = () => {
 
   }
 
+  function limparFiltro() {
+    setNome("")
+    setTipo("")
+    setPrecoMin("")
+    setPrecoMax("")
+    setQuartos("")
+    setSearchParams({ sort: "id", page: "0", size: "10" })
+    listarImoveis()
+  }
+
   useEffect(() => {
     listarImoveis()
     const params = new URLSearchParams(searchParams)
@@ -271,19 +284,30 @@ const Home = () => {
 
   return (
     <div className="container p-5">
+      <div className="header-imovel">
+        <h1>Encontre o imóvel ideal <br />
+          <span className='texto-destaque'>para você</span></h1>
+      </div>
       <div className='searchBar-container d-flex justify-content-center'><div className="searchBar d-flex justify-content-between align-items-end gap-2">
-        <input value={nome} onChange={(e) => setNome(e.target.value)} type="search" name="" id="" placeholder='Pesquise um imóvel' />
+        <input value={nome} onChange={(e) => setNome(e.target.value)} type="search" name="" id="" placeholder='Digite o nome de um imóvel e aguarde para pesquisar' />
 
       </div>
       </div>
       <div className="filtro-container d-flex justify-content-center">
-        <div className="filtro d-flex justify-content-between align-items-end gap-2">
-          <SelectTipo tipo={tipo} onChange={(e) => setTipo(e.target.value)} />
+        <div className="filtro">
+          <div className=' d-flex justify-content-between align-items-center gap-2'>
+            <SelectTipo tipo={tipo} onChange={(e) => setTipo(e.target.value)} />
 
-          <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => validandoInput(e, setPrecoMin, apenasNumeros)} />
-          <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => validandoInput(e, setPrecoMax, apenasNumeros)} />
-          <InputTexto value={quartos} placeholder='Qtd Quartos' onChange={(e) => validandoInput(e, setQuartos, apenasNumeros)} />
-          <Botao className='botaoFiltro' onClick={mudarParametro}> Filtrar </Botao>
+            <InputTexto value={precoMin} placeholder='Preço Min' onChange={(e) => formatarValor(e, setPrecoMin)} isMoeda />
+            <InputTexto value={precoMax} placeholder='Preço Max' onChange={(e) => formatarValor(e, setPrecoMax)} isMoeda />
+            <InputTexto value={quartos} placeholder='Qtd Min Quartos' onChange={(e) => validandoInput(e, setQuartos, apenasNumeros)} />
+
+            <Botao className='botaoFiltro' onClick={mudarParametro}> Filtrar </Botao>
+          </div>
+
+          <div className="limparFiltro">
+            <a onClick={limparFiltro}>Limpar filtro</a>
+          </div>
         </div>
       </div>
 

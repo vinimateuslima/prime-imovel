@@ -35,7 +35,7 @@ const Header = () => {
     <nav className='header'>
 
       <div className="col-6">
-        <h1>Prime Imóvel</h1>
+        <h1 onClick={() => navigate("/")}><span className='texto-destaque'>Prime</span> Imóvel</h1>
       </div>
       <div className="col-6 d-flex justify-content-end">
        { name ? <DropdownUsuario userRole={userRole} name={name} /> : <button className='btn-entrar' onClick={() => navigate("/login")} ><CiLogin /> Entrar</button> }

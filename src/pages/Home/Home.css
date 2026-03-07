@@ -92,3 +92,22 @@
 .botaoFiltro {
     width: 150px;
 }
+
+
+.header-imovel {
+    text-align: center;
+   
+}
+
+.header-imovel h1 {
+     font-size: 3em;
+     margin-bottom: 50px;
+}
+
+.limparFiltro {
+    margin-top: 5px;
+    width: 99%;
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+}

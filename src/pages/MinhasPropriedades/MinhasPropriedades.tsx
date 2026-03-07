@@ -534,7 +534,7 @@ const MinhasPropriedades = () => {
 
         <div className="row align-items-center">
           <div className="col-6">
-            <InputTexto value={city} controlador={controlCity} submitOcorreu={submitOcorreu} onChange={(e) => validandoInput(e, setCity, Max255Caracteres)} label='Cidade' />
+            <InputTexto value={city} controlador={controlCity} submitOcorreu={submitOcorreu} onChange={(e) => validandoInput(e, setCity, Max255Caracteres)} label='Cidade' className='inputCidade'/>
           </div>
           <div className="col-6">
             <SelectTipo tipo={state} onChange={(e) => setState(e.target.value)} label="Estado" temLabel>
