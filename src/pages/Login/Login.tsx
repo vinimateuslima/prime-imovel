@@ -1,17 +1,15 @@
-import { CiMail } from 'react-icons/ci'
-import FormBasico from '../../features/components/FormBasico/FormBasico'
-import './Login.css'
-import { IoLockClosedOutline } from 'react-icons/io5'
-import Botao from '../../features/components/Botao/Botao'
-import { useEffect, useState, type ChangeEvent } from 'react'
-import { Max100Caracteres, Max2147483647Caracteres, Max255Caracteres, validandoInput, validandoInputVazioEMinimo, validarInputVazio } from '../../features/Util'
-import { apiController } from '../../features/api/apiController'
-import { Router, useNavigate } from 'react-router-dom'
-import InputTexto from '../../features/components/InputTexto/InputTexto'
-import InputSenha from '../../features/components/InputSenha/InputSenha'
-import Swal from "sweetalert2";
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Bounce, toast } from 'react-toastify'
+import Swal from "sweetalert2"
 import { useLoading } from '../../contexts/LoadingContext'
+import { Max2147483647Caracteres, Max255Caracteres, validandoInput, validandoInputVazioEMinimo } from '../../features/Util'
+import { apiController } from '../../features/api/apiController'
+import Botao from '../../features/components/Botao/Botao'
+import FormBasico from '../../features/components/FormBasico/FormBasico'
+import InputSenha from '../../features/components/InputSenha/InputSenha'
+import InputTexto from '../../features/components/InputTexto/InputTexto'
+import './Login.css'
 
 
 

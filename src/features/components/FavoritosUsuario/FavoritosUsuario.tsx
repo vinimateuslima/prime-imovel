@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import CardImovel from '../CardImovel/CardImovel'
-import TabelaPropriedades from '../TabelaPropriedades/TabelaPropriedades'
 import './FavoritosUsuario.css'
 import type { Propriedade } from '../../../pages/Home/Home'
 import { Bounce, toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 import { useLoading } from '../../../contexts/LoadingContext'
 import { apiController } from '../../api/apiController'
 import { FaRegHeart } from 'react-icons/fa'
@@ -14,13 +12,12 @@ const FavoritosUsuario = () => {
     const [propriedadesFavoritas, setPropriedadesFavoridas] = useState<Propriedade[]>([])
 
     // Ferramentas
-    const navigate = useNavigate();
     const { setLoading } = useLoading();
 
     async function aoFavoritar(id: number): Promise<boolean> {
         setLoading(true)
 
-        await apiController.post(`/user/favorites/${id}`).then((response) => {
+        await apiController.post(`/user/favorites/${id}`).then(() => {
 
             setLoading(false)
 
@@ -55,7 +52,7 @@ const FavoritosUsuario = () => {
     async function desFavoritar(id: number): Promise<boolean> {
         setLoading(true)
 
-        await apiController.delete(`/user/favorites/${id}`).then((response) => {
+        await apiController.delete(`/user/favorites/${id}`).then(() => {
 
             setLoading(false)
             return true

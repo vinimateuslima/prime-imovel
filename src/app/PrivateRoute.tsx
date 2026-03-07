@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { apiController } from "../features/api/apiController";
 
 export default function PrivateRoute() {
   const token = localStorage.getItem("token");

@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react"
-import InputTexto from "../../features/components/InputTexto/InputTexto"
-import "./PerfilUsuario.css"
-import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputMinimo, validandoInputVazioEMinimo } from "../../features/Util"
-import InputSenha from "../../features/components/InputSenha/InputSenha"
-import Botao from "../../features/components/Botao/Botao"
-import { apiController } from "../../features/api/apiController"
-import type { Usuario } from "../../features/Interfaces"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
 import { useLoading } from "../../contexts/LoadingContext"
+import { apiController } from "../../features/api/apiController"
+import Botao from "../../features/components/Botao/Botao"
+import InputSenha from "../../features/components/InputSenha/InputSenha"
+import InputTexto from "../../features/components/InputTexto/InputTexto"
+import type { Usuario } from "../../features/Interfaces"
+import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputMinimo } from "../../features/Util"
+import "./PerfilUsuario.css"
 
 interface PerfilUsuarioProps {
     dadosUsuario?: Usuario;
 }
 
 
-const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
+const PerfilUsuario = ({ dadosUsuario }: PerfilUsuarioProps) => {
 
 
     const [name, setName] = useState<string>('')
@@ -24,20 +23,20 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
     // Controllers
     const [controlName, setControlName] = useState<boolean>(false)
     const [controlPassword, setControlPassword] = useState<boolean>(false)
-    const [submitOcorreu, setSubmitOcorreu] = useState<boolean>(true)
+    const [submitOcorreu, setSubmitOcorreu] = useState<boolean>(false)
 
 
     const [mensagemErroName, setMensagemErroName] = useState<string>('')
     const [mensagemErroPassword, setMensagemErroPassword] = useState<string>('')
 
     // Ferramentas
-    const navigate = useNavigate();
     const { setLoading } = useLoading();
-
 
     function atualizarUsuario() {
 
         if (!controlName || !controlPassword) return
+
+        setSubmitOcorreu(true)
 
         Swal.fire({
             title: "Tem certeza que deseja atualizar o usuário?",
@@ -51,6 +50,8 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
             if (result.isConfirmed) {
 
                 setLoading(true)
+                setSubmitOcorreu(false)
+
 
                 const data: { name?: string, password?: string, role?: string } = {}
 
@@ -58,8 +59,9 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
 
                 if (password) data.password = password
 
-                apiController.put('/user/update', data).then((response) => {
+                apiController.put('/user/update', data).then(() => {
                     setLoading(false)
+                    setSubmitOcorreu(false)
                     Swal.fire({
                         title: 'Sucesso!',
                         text: 'Usuário atualizado com sucesso!',
@@ -70,6 +72,7 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
 
                 }).catch((error) => {
                     setLoading(false)
+                    setSubmitOcorreu(false)
                     console.log("Erro ao buscar usuário ", error.message)
                 })
 
@@ -78,7 +81,7 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
 
     }
 
-    
+
 
     useEffect(() => {
         validandoInputMinimo(name, setControlName, setMensagemErroName, 3, 'nome')
@@ -86,7 +89,7 @@ const PerfilUsuario = ({dadosUsuario}:PerfilUsuarioProps) => {
 
     }, [name, password])
 
-     useEffect(() => {
+    useEffect(() => {
         setName(dadosUsuario?.name || '')
         setPassword(dadosUsuario?.password || "")
     }, [dadosUsuario])

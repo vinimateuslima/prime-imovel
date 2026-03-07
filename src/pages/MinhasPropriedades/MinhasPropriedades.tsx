@@ -44,23 +44,20 @@ const MinhasPropriedades = () => {
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isAtualizar, setIsAtualizar] = useState<boolean>();
 
-  const [propriedadeOriginal, setPropriedadeOriginal] = useState<Propriedade>();
 
   // Controladores
   const [controlName, setControlName] = useState<boolean>(false);
   const [controlDescription, setControlDescription] = useState<boolean>(false);
-  const [controlType, setControlType] = useState<boolean>(false);
   const [controlValue, setControlValue] = useState<boolean>(false);
   const [controlArea, setControlArea] = useState<boolean>(false);
   const [controlBedrooms, setControlBedrooms] = useState<boolean>(false);
   const [controlAddress, setControlAddress] = useState<boolean>(false);
   const [controlCity, setControlCity] = useState<boolean>(false);
   const [controlImage, setControlImage] = useState<boolean>(false);
-  const [controlState, setControlState] = useState<boolean>(false);
 
 
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
+  const [size] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
 
 
@@ -89,7 +86,7 @@ const MinhasPropriedades = () => {
       setState(response.state)
       setCity(response.city)
       setImagePreview(response.imageUrls)
-      setPropriedadeOriginal(response)
+
 
       setLoading(false)
 
@@ -122,7 +119,7 @@ const MinhasPropriedades = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true)
-        apiController.delete(`/property/${id}`).then((response) => {
+        apiController.delete(`/property/${id}`).then(() => {
 
           Swal.fire({
             title: 'Sucesso!',
@@ -172,7 +169,7 @@ const MinhasPropriedades = () => {
     setCity("")
     setImage(null)
     setImagePreview("")
-    setPropriedadeOriginal(undefined)
+
   }
 
   async function buscarPropriedadesUsuario() {
@@ -273,7 +270,7 @@ const MinhasPropriedades = () => {
 
 
         setLoading(true)
-        apiController.post(`/property`, data).then((response) => {
+        apiController.post(`/property`, data).then(() => {
 
           Swal.fire({
             title: 'Sucesso!',
@@ -348,7 +345,7 @@ const MinhasPropriedades = () => {
 
 
         setLoading(true)
-        apiController.put(`/property/${id}`, data).then((response) => {
+        apiController.put(`/property/${id}`, data).then(() => {
 
           Swal.fire({
             title: 'Sucesso!',
@@ -420,7 +417,7 @@ const MinhasPropriedades = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true)
-        apiController.patch(`/property/status/${id}`).then((response) => {
+        apiController.patch(`/property/status/${id}`).then(() => {
 
           Swal.fire({
             title: 'Sucesso!',

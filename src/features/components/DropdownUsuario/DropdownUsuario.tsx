@@ -1,12 +1,13 @@
 import './DropdownUsuario.css'
 
 import { useEffect, useRef, useState } from "react";
-import { FaHeart, FaUser, FaSignOutAlt, FaBuilding, FaRegUserCircle } from "react-icons/fa";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { FaUser, FaSignOutAlt, FaBuilding, FaRegUserCircle } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 interface DropdownUsuarioProps {
     name: string;
+    userRole: string;
 }
 
 function DropdownUsuario(props: DropdownUsuarioProps) {
@@ -70,20 +71,18 @@ function DropdownUsuario(props: DropdownUsuarioProps) {
 
                 {open && (
                     <div className="menu">
-                        <div className="item">
-                            <FaHeart />
-                            Favoritos
-                        </div>
 
                         <div className="item" onClick={() => navigate("/minha-conta")}>
                             <FaUser />
                             Minha Conta
                         </div>
 
-                        <div className="item" onClick={() => navigate("/minhas-propriedades")}>
+                        {props.userRole != "CLIENTE" && <div className="item" onClick={() => navigate("/minhas-propriedades")}>
                             <FaBuilding />
                             Minhas Propriedades
                         </div>
+
+                        }
 
                         <div className="divider"></div>
 

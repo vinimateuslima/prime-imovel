@@ -1,9 +1,7 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "./TabelaPropriedades.css";
 import type { Propriedade } from "../../../pages/Home/Home";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
-import { Form, ToggleButton } from "react-bootstrap";
-import { useState } from "react";
+import { Form } from "react-bootstrap";
 
 type TabelaPropriedadesProps = {
     propriedades: Propriedade[];

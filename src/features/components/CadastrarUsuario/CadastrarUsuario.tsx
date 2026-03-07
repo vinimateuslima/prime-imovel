@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import './CadastrarUsuario.css'
-import type { Usuario } from '../../Interfaces'
-import { useNavigate } from 'react-router-dom'
 import { useLoading } from '../../../contexts/LoadingContext'
 import Swal from 'sweetalert2'
 import { apiController } from '../../api/apiController'
-import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputMinimo, validandoInputVazioEMinimo, validandoInputVazioEMinimoEmail } from '../../Util'
+import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputVazioEMinimo, validandoInputVazioEMinimoEmail } from '../../Util'
 import InputTexto from '../InputTexto/InputTexto'
 import InputSenha from '../InputSenha/InputSenha'
 import Botao from '../Botao/Botao'
@@ -16,7 +14,6 @@ const CadastrarUsuario = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [role, setRole] = useState<string>('CORRETOR')
-    const [dadosOriginais, setDadosOriginais] = useState<Usuario>()
 
     // Controllers
     const [controlName, setControlName] = useState<boolean>(false)
@@ -29,8 +26,6 @@ const CadastrarUsuario = () => {
     const [mensagemErroEmail, setMensagemErroEmail] = useState<string>('Campo obrigatório')
     const [mensagemErroPassword, setMensagemErroPassword] = useState<string>('Campo obrigatório')
 
-    // Ferramentas
-    const navigate = useNavigate();
     const { setLoading } = useLoading();
 
 
@@ -62,7 +57,7 @@ const CadastrarUsuario = () => {
                 }
 
 
-                apiController.post('/user/create', data).then((response) => {
+                apiController.post('/user/create', data).then(() => {
                     setLoading(false)
                     Swal.fire({
                         title: 'Sucesso!',

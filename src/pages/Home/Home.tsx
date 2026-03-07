@@ -1,17 +1,15 @@
-import { CiLocationOn } from 'react-icons/ci'
-import './Home.css'
-import { MdOutlineBed } from 'react-icons/md'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import CardImovel from '../../features/components/CardImovel/CardImovel'
+
 import { useEffect, useState } from 'react'
-import { apiController } from '../../features/api/apiController'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useLoading } from '../../contexts/LoadingContext'
-import InputTexto from '../../features/components/InputTexto/InputTexto'
-import Botao from '../../features/components/Botao/Botao'
-import { apenasNumeros, validandoInput } from '../../features/Util'
-import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
+import { useSearchParams } from 'react-router-dom'
 import { Bounce, toast } from 'react-toastify'
+import { useLoading } from '../../contexts/LoadingContext'
+import { apiController } from '../../features/api/apiController'
+import Botao from '../../features/components/Botao/Botao'
+import CardImovel from '../../features/components/CardImovel/CardImovel'
+import InputTexto from '../../features/components/InputTexto/InputTexto'
+import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
+import { apenasNumeros, validandoInput } from '../../features/Util'
+import './Home.css'
 
 export interface Propriedade {
   "id": number,
@@ -46,12 +44,7 @@ const Home = () => {
   const [nome, setNome] = useState(searchParams.get("name") || "");
   const [totalPages, setTotalPages] = useState(0);
 
-  const [pesquisaDebounce, setPesquisaDebounce] = useState("");
-
-
-
   // Ferramentas
-  const navigate = useNavigate();
 
   const { setLoading } = useLoading();
 
@@ -107,7 +100,7 @@ const Home = () => {
   async function aoFavoritar(id: number): Promise<boolean> {
     setLoading(true)
 
-    await apiController.post(`/user/favorites/${id}`).then((response) => {
+    await apiController.post(`/user/favorites/${id}`).then(() => {
 
       setLoading(false)
 
@@ -142,7 +135,7 @@ const Home = () => {
   async function desFavoritar(id: number): Promise<boolean> {
     setLoading(true)
 
-    await apiController.delete(`/user/favorites/${id}`).then((response) => {
+    await apiController.delete(`/user/favorites/${id}`).then(() => {
 
       setLoading(false)
       return true

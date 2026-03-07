@@ -13,17 +13,11 @@ import { useLoading } from '../../contexts/LoadingContext'
 
 const Detalhes = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const { setLoading } = useLoading();
 
     // Ferramentas
     const navigate = useNavigate();
-
-    const [tipo, setTipo] = useState<string>("")
-    const [endereco, setEndereco] = useState<string>("")
-    const [valor, setValors] = useState<string>("")
-    const [quartos, setQuartos] = useState<string>("")
-    const [area, setArea] = useState<string>("")
 
     const [propriedade, setPropriedade] = useState<Propriedade>()
 

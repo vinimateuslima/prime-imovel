@@ -5,7 +5,6 @@ import PerfilUsuario from "../PerfilUsuario/PerfilUsuario";
 import { apiController } from "../../features/api/apiController";
 import type { Usuario } from "../../features/Interfaces";
 import FavoritosUsuario from "../../features/components/FavoritosUsuario/FavoritosUsuario";
-import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../contexts/LoadingContext";
 import CadastrarUsuario from "../../features/components/CadastrarUsuario/CadastrarUsuario";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
@@ -18,14 +17,11 @@ const AbasPerfil = () => {
     const [dadosUsuario, setDadosUsuario] = useState<Usuario>()
 
     // Ferramentas
-    const navigate = useNavigate();
     const { setLoading } = useLoading();
 
     function buscarUsuario() {
         setLoading(true)
         apiController.get("/user").then(response => {
-
-            let tipoUsuario: any = response.role
 
 
             setDadosUsuario(response)

@@ -1,11 +1,10 @@
 import FormBasico from '../../features/components/FormBasico/FormBasico'
 import '../Login/Login.css'
-import { IoLockClosedOutline } from 'react-icons/io5'
 import Botao from '../../features/components/Botao/Botao'
-import { useEffect, useState, type ChangeEvent } from 'react'
-import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputVazioEMinimo, validandoInputVazioEMinimoEmail, validarInputVazio } from '../../features/Util'
+import { useEffect, useState } from 'react'
+import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputVazioEMinimo, validandoInputVazioEMinimoEmail } from '../../features/Util'
 import { apiController } from '../../features/api/apiController'
-import { Router, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
 import InputSenha from '../../features/components/InputSenha/InputSenha'
 import Swal from "sweetalert2";
@@ -47,7 +46,7 @@ const Cadastro = () => {
                 role: 'CLIENTE'
             }
 
-            apiController.post('/auth/register', data).then((response) => {
+            apiController.post('/auth/register', data).then(() => {
                 setLoading(false)
                 navigate('/login')
                 toast.success('Cadastro realizado com sucesso!', {
