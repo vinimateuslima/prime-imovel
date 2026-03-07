@@ -23,8 +23,6 @@ const CardImovel = (props: CardImovelProps) => {
 
             const retorno = props.aoFavoritar?.(id)
 
-            console.log("Retorno ", retorno);
-
 
             if (retorno) {
                 setFavorito(!favorito)

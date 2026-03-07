@@ -29,7 +29,7 @@ const Detalhes = () => {
         if (id) {
             setLoading(true)
             apiController.get(`/property/${id}`).then((response => {
-                console.log("Resposta Propriedade ", response);
+  
                 setPropriedade(response)
                 setLoading(false)
 

@@ -72,7 +72,7 @@ const MinhasPropriedades = () => {
 
     apiController.get(`/property/${id}`).then((response) => {
 
-      console.log(response);
+
 
       setAbrirModal(true)
       setId(response.id)
@@ -184,8 +184,7 @@ const MinhasPropriedades = () => {
 
       tipoUsuario = response.role
 
-      console.log("usuario role ", response.role);
-      console.log("usuario 2 ", tipoUsuario == "ADMIN");
+
 
     }).catch((error) => {
       setLoading(false)
@@ -193,23 +192,23 @@ const MinhasPropriedades = () => {
 
     })
 
-    console.log("usuario 3 ", tipoUsuario);
+
 
     if (tipoUsuario == "CLIENTE") {
       navigate("/");
     }
 
     if (tipoUsuario == "ADMIN") {
-      console.log("passou");
+
 
       path = `/property?page=${page}`
     }
 
-    console.log("path ", path);
+
 
 
     apiController.get(path).then((response) => {
-      console.log("response ", response);
+
 
       if (tipoUsuario == "ADMIN") {
         setPropriedades(response.content)
@@ -266,7 +265,7 @@ const MinhasPropriedades = () => {
           imageUrls: imageUrl
         }
 
-        console.log("Dados ", data);
+
 
 
         setLoading(true)
@@ -310,7 +309,7 @@ const MinhasPropriedades = () => {
     if (isAtualizar) {
       atualizarPropriedade()
     } else {
-      console.log("passou");
+
       if (!controlImage) return
       cadastrarPropriedade()
     }
@@ -341,7 +340,7 @@ const MinhasPropriedades = () => {
           state: state
         }
 
-        console.log("Dados ", data);
+
 
 
         setLoading(true)
@@ -403,8 +402,7 @@ const MinhasPropriedades = () => {
   };
 
   function aoTrocarStatus(id: number, statusAtual: boolean) {
-    console.log("Id ", id);
-    console.log("Status Atual ", statusAtual);
+
 
     Swal.fire({
       title: `Tem certeza que deseja ${statusAtual ? `desativar` : `ativar`} a propriedade?`,
@@ -449,10 +447,10 @@ const MinhasPropriedades = () => {
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("imagePreview ", imagePreview);
+
 
     if (e.target.files) {
-      console.log("Arquivo ", e.target.files);
+
 
       setImage(e.target.files[0]);
     }
@@ -534,7 +532,7 @@ const MinhasPropriedades = () => {
 
         <div className="row align-items-center">
           <div className="col-6">
-            <InputTexto value={city} controlador={controlCity} submitOcorreu={submitOcorreu} onChange={(e) => validandoInput(e, setCity, Max255Caracteres)} label='Cidade' className='inputCidade'/>
+            <InputTexto value={city} controlador={controlCity} submitOcorreu={submitOcorreu} onChange={(e) => validandoInput(e, setCity, Max255Caracteres)} label='Cidade' className='inputCidade' />
           </div>
           <div className="col-6">
             <SelectTipo tipo={state} onChange={(e) => setState(e.target.value)} label="Estado" temLabel>

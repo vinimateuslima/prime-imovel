@@ -115,8 +115,6 @@ export function formatarValor(e: ChangeEvent<HTMLInputElement, HTMLInputElement>
     setState("");
     return;
   }
-
-  console.log("Valor ", valor);
   
    if (valor == "00") {
     setState("");

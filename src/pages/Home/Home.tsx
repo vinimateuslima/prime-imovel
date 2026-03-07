@@ -57,7 +57,7 @@ const Home = () => {
       params.delete("name")
     }
 
-    console.log("Tipo ", tipo);
+
 
 
     if (tipo) {
@@ -167,7 +167,7 @@ const Home = () => {
   }
 
   function listarImoveis() {
-    console.log("page ", page);
+
 
     const query = `?sort=id&page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
 
@@ -175,11 +175,10 @@ const Home = () => {
 
     setLoading(true)
     apiController.get(`/property${query}`).then(async response => {
-      console.log("resposta ", response)
+
 
       const listaFavoritos: Propriedade[] | void = await listarFavoritos();
 
-      console.log("teste ", listaFavoritos);
 
 
       if (listaFavoritos) {
@@ -196,7 +195,6 @@ const Home = () => {
 
         });
         setDadosImoveis(dadosTratados);
-        console.log("Dados tratados ", dadosTratados);
 
 
       } else {
@@ -223,7 +221,7 @@ const Home = () => {
 
     return apiController.get(`/user/favorites`)
       .then(response => {
-        console.log("favoritos ", response)
+
         return response
       })
       .catch(error => {
@@ -272,7 +270,7 @@ const Home = () => {
     const timer = setTimeout(() => {
       mudarParametro()
       listarImoveis()
-      console.log("Nome ", nome);
+
 
     }, 1000);
 
