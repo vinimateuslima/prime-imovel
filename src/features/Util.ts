@@ -38,6 +38,39 @@ export function validandoInputVazioEMinimo(valor: string, setControlador: Functi
   }
 }
 
+export function validandoInputMinimo(valor: string, setControlador: Function, setMensagemErro: Function, minimo: number, nome: string) {
+
+  if (valor == "") {
+    setControlador(true)
+    return
+  }
+
+  if (valor.length < minimo) {
+    setControlador(false)
+    setMensagemErro(`O campo ${nome} deve conter no mínimo ${minimo} caracteres`)
+    return
+  }
+  setControlador(true)
+
+}
+
+export function validandoInputVazioEMinimoEmail(valor: string, setControlador: Function, setMensagemErro: Function) {
+        if (valor.trim() === '') {
+            setControlador(false)
+            setMensagemErro('Campo obrigatório')
+        } else {
+
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regex.test(valor)) {
+                setControlador(false)
+                setMensagemErro(`Email no formato incorreto`)
+                return
+            }
+
+            setControlador(true)
+        }
+    }
+
 export function Max255Caracteres(valor: string): boolean {
   if (valor.length <= 255) {
     return true;
@@ -65,9 +98,9 @@ export function apenasNumeros(valor: string): boolean {
   if (!regex.test(valor)) return false;
 
   const numero = Number(valor);
-  
 
-  if (numero < 0 ) return false;
+
+  if (numero < 0) return false;
 
   if (numero > 10000000) return false;
 
@@ -76,7 +109,7 @@ export function apenasNumeros(valor: string): boolean {
 
 export function formatarValor(e: ChangeEvent<HTMLInputElement, HTMLInputElement>, setState: Function) {
 
-let valor = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+  let valor = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
 
   if (!valor) {
     setState("");

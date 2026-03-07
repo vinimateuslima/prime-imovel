@@ -7,6 +7,7 @@ import Cadastro from "../pages/Cadastro/Cadastro";
 import SessaoExpirada from "../pages/SessaoExpirada/SessaoExpirada";
 import Detalhes from "../pages/Detalhes/Detalhes";
 import MinhasPropriedades from "../pages/MinhasPropriedades/MinhasPropriedades";
+import MinhaConta from "../pages/MinhaConta/MinhaConta";
 
 export function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
                     <Route path="/" element={<Home />} />
                     <Route path="/detalhes" element={<Detalhes />} />
                     <Route path="/minhas-propriedades" element={<MinhasPropriedades />} />
+                    <Route path="/minha-conta" element={<MinhaConta />} />
                 </Route>
 
 

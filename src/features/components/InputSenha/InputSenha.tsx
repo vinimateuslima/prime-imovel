@@ -30,7 +30,7 @@ const InputSenha = (props: InputTextoProps) => {
         </div>}
       </div>
       <input
-        type={"text"}
+        type={"password"}
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}

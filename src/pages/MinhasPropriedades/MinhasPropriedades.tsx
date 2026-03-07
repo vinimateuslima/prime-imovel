@@ -59,6 +59,12 @@ const MinhasPropriedades = () => {
   const [controlState, setControlState] = useState<boolean>(false);
 
 
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+
+
+
   const [isAdmin, setIsAdmin] = useState<boolean>();
 
 
@@ -199,7 +205,7 @@ const MinhasPropriedades = () => {
     if (tipoUsuario == "ADMIN") {
       console.log("passou");
 
-      path = "/property"
+      path = `/property?page=${page}`
     }
 
     console.log("path ", path);
@@ -210,6 +216,7 @@ const MinhasPropriedades = () => {
 
       if (tipoUsuario == "ADMIN") {
         setPropriedades(response.content)
+        setTotalPages(response.totalPages)
         setIsAdmin(true)
       } else {
         setIsAdmin(false)
@@ -325,7 +332,7 @@ const MinhasPropriedades = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
 
-          const data = {
+        const data = {
           name: name,
           description: description,
           type: type,
@@ -472,6 +479,11 @@ const MinhasPropriedades = () => {
 
   }, [name, description, value, area, bedrooms, address, city, image])
 
+  useEffect(() => {
+    buscarPropriedadesUsuario()
+
+  }, [page, size])
+
   return (
     <>
       <div className=" container mt-5 mb-5">
@@ -480,6 +492,17 @@ const MinhasPropriedades = () => {
           <Botao onClick={aoCriar}><FaPlus /> Nova propriedade</Botao>
         </div>
         <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={aoExcluir} aoTrocarStatus={aoTrocarStatus} isAdmin={isAdmin} />
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => { setPage(index) }}
+              className={page == index ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
 
       <ModalPadrao titulo={isAtualizar ? "Atualizar propriedade" : "Cadastrar propriedade"} aberto={abrirModal} aoFechar={() => aoFechar()} className='modalEditarPropriedade'>
@@ -525,7 +548,7 @@ const MinhasPropriedades = () => {
           </div>
         </div>
 
-       {!isAtualizar &&  <InputArquivo onChange={handleFileChange} controlador={controlImage} submitOcorreu={submitOcorreu} />}
+        {!isAtualizar && <InputArquivo onChange={handleFileChange} controlador={controlImage} submitOcorreu={submitOcorreu} />}
         {/* <div className="image-preview">
           <img src={imagePreview} alt="" />
         </div> */}

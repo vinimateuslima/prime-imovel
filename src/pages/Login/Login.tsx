@@ -50,6 +50,7 @@ const Login = () => {
 
       apiController.post('/auth/login', data).then((response) => {
         setLoading(false)
+        setSubmitOcorreu(false)
         if (response.token) {
           localStorage.setItem('token', response.token)
           navigate('/')

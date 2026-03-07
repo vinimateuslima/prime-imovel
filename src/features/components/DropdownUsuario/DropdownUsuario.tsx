@@ -41,7 +41,22 @@ function DropdownUsuario(props: DropdownUsuarioProps) {
         });
     }
 
+    useEffect(() => {
+        function handleClickFora(event: MouseEvent) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setOpen(false);
+            }
+        }
 
+        document.addEventListener("mousedown", handleClickFora);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickFora);
+        };
+    }, []);
 
     return (
         <>
@@ -52,34 +67,34 @@ function DropdownUsuario(props: DropdownUsuarioProps) {
                 </div>
 
 
+
+                {open && (
+                    <div className="menu">
+                        <div className="item">
+                            <FaHeart />
+                            Favoritos
+                        </div>
+
+                        <div className="item" onClick={() => navigate("/minha-conta")}>
+                            <FaUser />
+                            Minha Conta
+                        </div>
+
+                        <div className="item" onClick={() => navigate("/minhas-propriedades")}>
+                            <FaBuilding />
+                            Minhas Propriedades
+                        </div>
+
+                        <div className="divider"></div>
+
+                        <div className="item" onClick={Logout}>
+                            <FaSignOutAlt />
+                            Sair
+                        </div>
+                    </div>
+                )}
+
             </div>
-            {open && (
-                <div className="menu">
-                    <div className="item">
-                        <FaHeart />
-                        Favoritos
-                    </div>
-
-                    <div className="item">
-                        <FaUser />
-                        Minha Conta
-                    </div>
-
-                    <div className="item" onClick={()=> navigate("/minhas-propriedades")}>
-                        <FaBuilding />
-                        Minhas Propriedades
-                    </div>
-
-                    <div className="divider"></div>
-
-                    <div className="item" onClick={Logout}>
-                        <FaSignOutAlt />
-                        Sair
-                    </div>
-                </div>
-            )}
-
-
         </>
     );
 }

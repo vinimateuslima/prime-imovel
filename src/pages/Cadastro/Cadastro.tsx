@@ -3,7 +3,7 @@ import '../Login/Login.css'
 import { IoLockClosedOutline } from 'react-icons/io5'
 import Botao from '../../features/components/Botao/Botao'
 import { useEffect, useState, type ChangeEvent } from 'react'
-import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputVazioEMinimo, validarInputVazio } from '../../features/Util'
+import { Max100Caracteres, Max2147483647Caracteres, validandoInput, validandoInputVazioEMinimo, validandoInputVazioEMinimoEmail, validarInputVazio } from '../../features/Util'
 import { apiController } from '../../features/api/apiController'
 import { Router, useNavigate } from 'react-router-dom'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
@@ -64,7 +64,7 @@ const Cadastro = () => {
 
             }).catch((error) => {
                 setLoading(false)
-
+                setSubmitOcorreu(false)
                 Swal.fire({
                     icon: "error",
                     title: "Opa",
@@ -77,24 +77,7 @@ const Cadastro = () => {
         }
     }
 
-    function validandoInputVazioEMinimoEmail(valor: string, setControlador: Function, setMensagemErro: Function) {
-        if (valor.trim() === '') {
-            setControlador(false)
-            setMensagemErro('Campo obrigatório')
-        } else {
-
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!regex.test(valor)) {
-                setControlador(false)
-                setMensagemErro(`Email no formato incorreto`)
-                return
-            }
-
-            setControlador(true)
-        }
-    }
-
-
+    
 
     useEffect(() => {
         validandoInputVazioEMinimo(nome, setControlNome, setMensagemErroNome, 3, 'nome')
