@@ -11,6 +11,7 @@ import InputTexto from '../../features/components/InputTexto/InputTexto'
 import Botao from '../../features/components/Botao/Botao'
 import { apenasNumeros, validandoInput } from '../../features/Util'
 import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
+import { Bounce, toast } from 'react-toastify'
 
 export interface Propriedade {
   "id": number,
@@ -26,7 +27,8 @@ export interface Propriedade {
   "active": boolean,
   "brokerId": number,
   "brokerName": string,
-  "imageUrls": string
+  "imageUrls": string,
+  "favorito"?: boolean
 }
 
 const Home = () => {
@@ -102,6 +104,72 @@ const Home = () => {
 
   }
 
+  async function aoFavoritar(id: number): Promise<boolean> {
+    setLoading(true)
+
+    await apiController.post(`/user/favorites/${id}`).then((response) => {
+
+      setLoading(false)
+
+
+      return true
+
+
+    }).catch(error => {
+      setLoading(false)
+
+      console.error('Erro ao favoritar propriedade:', error.message)
+
+      toast.error('Erro ao favoritar propriedade.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
+      return false
+    })
+
+    return false
+
+  }
+
+  async function desFavoritar(id: number): Promise<boolean> {
+    setLoading(true)
+
+    await apiController.delete(`/user/favorites/${id}`).then((response) => {
+
+      setLoading(false)
+      return true
+
+    }).catch(error => {
+      setLoading(false)
+
+      console.error('Erro ao desFavoritar propriedade:', error.message)
+
+      toast.error('Erro ao tentar remover favorito.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return false
+    })
+
+    return false
+
+  }
+
   function listarImoveis() {
     console.log("page ", page);
 
@@ -110,17 +178,73 @@ const Home = () => {
     console.log("Query ", query);
 
     setLoading(true)
-    apiController.get(`/property${query}`).then(response => {
+    apiController.get(`/property${query}`).then(async response => {
       console.log("resposta ", response)
-      setLoading(false)
-      setDadosImoveis(response.content)
+
+      const listaFavoritos: Propriedade[] | void = await listarFavoritos();
+
+      console.log("teste ", listaFavoritos);
+
+
+      if (listaFavoritos) {
+        const dadosTratados = response.content.map((propriedade: Propriedade) => {
+
+          const isFavorito = listaFavoritos.some(
+            (fav: Propriedade) => fav.id === propriedade.id
+          );
+
+          return {
+            ...propriedade,
+            favorito: isFavorito
+          };
+
+        });
+        setDadosImoveis(dadosTratados);
+        console.log("Dados tratados ", dadosTratados);
+
+
+      } else {
+        setDadosImoveis(response.content)
+      }
+
+
       setTotalPages(response.totalPages);
+
+
+      setLoading(false)
 
     }).catch(error => {
       setLoading(false)
 
       console.error('Erro ao buscar imóveis:', error)
     })
+
+  }
+
+
+
+  async function listarFavoritos(): Promise<Propriedade[]> {
+
+    return apiController.get(`/user/favorites`)
+      .then(response => {
+        console.log("favoritos ", response)
+        return response
+      })
+      .catch(error => {
+        console.error('Erro ao buscar favoritos:', error.message)
+        toast.error('Erro ao buscar favoritos.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        return []
+      })
 
   }
 
@@ -184,16 +308,10 @@ const Home = () => {
           dadosImoveis?.map(propriedade => (
             <CardImovel
               key={propriedade.id}
-              titulo={propriedade.name}
-              cidade={propriedade.city}
-              estado={propriedade.state}
-              tipo={propriedade.type}
-              status={propriedade.active}
-              quartos={propriedade.bedrooms}
-              area={propriedade.area}
-              valor={propriedade.value}
+              propriedade={propriedade}
               link={`/detalhes?id=${propriedade.id}`}
-              imagemUrl={propriedade.imageUrls}
+              aoFavoritar={aoFavoritar}
+              desFavoritar={desFavoritar}
             />
           ))
         }
