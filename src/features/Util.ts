@@ -15,6 +15,15 @@ export function validarInputVazio(valor: string, setControlador: Function) {
   }
 }
 
+export function validarArquivoVazio(arquivo: File | null, setControlador: Function) {
+  if (!arquivo) {
+    setControlador(false);
+  } else {
+    setControlador(true);
+  }
+}
+
+
 export function validandoInputVazioEMinimo(valor: string, setControlador: Function, setMensagemErro: Function, minimo: number, nome: string) {
   if (valor.trim() === '') {
     setControlador(false)

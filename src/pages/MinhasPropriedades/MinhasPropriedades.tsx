@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import { useLoading } from '../../contexts/LoadingContext'
 import ModalPadrao from '../../features/components/Modal/ModalPadrao'
 import InputTexto from '../../features/components/InputTexto/InputTexto'
-import { apenasNumeros, estadosBrasil, formatarValor, Max100Caracteres, Max255Caracteres, validandoInput, validandoInputVazioEMinimo, validarInputVazio } from '../../features/Util'
+import { apenasNumeros, estadosBrasil, formatarValor, Max100Caracteres, Max255Caracteres, validandoInput, validandoInputVazioEMinimo, validarArquivoVazio, validarInputVazio } from '../../features/Util'
 import SelectTipo from '../../features/components/SelectTipo/SelectTipo'
 import Botao from '../../features/components/Botao/Botao'
 import Swal from 'sweetalert2'
 import { FaPlus } from 'react-icons/fa'
 import TextoArea from '../../features/components/TextoArea/TextoArea'
+import axios from 'axios'
+import InputArquivo from '../../features/components/InputArquivo/InputArquivo'
 
 const MinhasPropriedades = () => {
 
@@ -38,7 +40,11 @@ const MinhasPropriedades = () => {
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("AC");
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
   const [isAtualizar, setIsAtualizar] = useState<boolean>();
+
+  const [propriedadeOriginal, setPropriedadeOriginal] = useState<Propriedade>();
 
   // Controladores
   const [controlName, setControlName] = useState<boolean>(false);
@@ -49,6 +55,7 @@ const MinhasPropriedades = () => {
   const [controlBedrooms, setControlBedrooms] = useState<boolean>(false);
   const [controlAddress, setControlAddress] = useState<boolean>(false);
   const [controlCity, setControlCity] = useState<boolean>(false);
+  const [controlImage, setControlImage] = useState<boolean>(false);
   const [controlState, setControlState] = useState<boolean>(false);
 
 
@@ -75,6 +82,8 @@ const MinhasPropriedades = () => {
       setAddress(response.address)
       setState(response.state)
       setCity(response.city)
+      setImagePreview(response.imageUrls)
+      setPropriedadeOriginal(response)
 
       setLoading(false)
 
@@ -155,6 +164,9 @@ const MinhasPropriedades = () => {
     setAddress("")
     setState("AC")
     setCity("")
+    setImage(null)
+    setImagePreview("")
+    setPropriedadeOriginal(undefined)
   }
 
   async function buscarPropriedadesUsuario() {
@@ -222,8 +234,21 @@ const MinhasPropriedades = () => {
       cancelButtonText: "Não",
       confirmButtonColor: "#C9A227",
       cancelButtonColor: "#0F172A"
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
+
+        let imageUrl = "https://placehold.co/600x400";
+
+        if (image) {
+          const urlRetornada = await uploadImagem(image)
+
+          if (urlRetornada.trim() != "") {
+            imageUrl = urlRetornada
+          }
+
+        }
+
+
         const data = {
           name: name,
           description: description,
@@ -234,7 +259,7 @@ const MinhasPropriedades = () => {
           address: address,
           city: city,
           state: state,
-          imageUrls: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+          imageUrls: imageUrl
         }
 
         console.log("Dados ", data);
@@ -282,7 +307,7 @@ const MinhasPropriedades = () => {
       atualizarPropriedade()
     } else {
       console.log("passou");
-
+      if (!controlImage) return
       cadastrarPropriedade()
     }
   }
@@ -297,9 +322,10 @@ const MinhasPropriedades = () => {
       cancelButtonText: "Não",
       confirmButtonColor: "#C9A227",
       cancelButtonColor: "#0F172A"
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const data = {
+
+          const data = {
           name: name,
           description: description,
           type: type,
@@ -308,8 +334,7 @@ const MinhasPropriedades = () => {
           bedrooms: bedrooms,
           address: address,
           city: city,
-          state: state,
-          //imageUrls: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+          state: state
         }
 
         console.log("Dados ", data);
@@ -346,6 +371,32 @@ const MinhasPropriedades = () => {
     })
 
   }
+
+  async function uploadImagem(file: File) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "upload_propriedades"); // seu preset
+
+    let resposta = ""
+
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/dbdgfkp4c/image/upload",
+      formData
+    ).then((response) => {
+      resposta = response.data.secure_url;
+      return resposta
+    }).catch((error) => {
+      console.log(error.message);
+      return resposta
+    })
+
+
+    console.log("Response da imagem ", response);
+    return resposta
+
+
+  };
 
   function aoTrocarStatus(id: number, statusAtual: boolean) {
     console.log("Id ", id);
@@ -393,6 +444,16 @@ const MinhasPropriedades = () => {
 
   }
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("imagePreview ", imagePreview);
+
+    if (e.target.files) {
+      console.log("Arquivo ", e.target.files);
+
+      setImage(e.target.files[0]);
+    }
+  };
+
   useEffect(() => {
     buscarPropriedadesUsuario()
 
@@ -407,7 +468,9 @@ const MinhasPropriedades = () => {
     validarInputVazio(bedrooms, setControlBedrooms)
     validarInputVazio(address, setControlAddress)
     validarInputVazio(city, setControlCity)
-  }, [name, description, value, area, bedrooms, address, city])
+    validarArquivoVazio(image, setControlImage)
+
+  }, [name, description, value, area, bedrooms, address, city, image])
 
   return (
     <>
@@ -419,7 +482,7 @@ const MinhasPropriedades = () => {
         <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={aoExcluir} aoTrocarStatus={aoTrocarStatus} isAdmin={isAdmin} />
       </div>
 
-      <ModalPadrao aberto={abrirModal} aoFechar={() => aoFechar()} className='modalEditarPropriedade'>
+      <ModalPadrao titulo={isAtualizar ? "Atualizar propriedade" : "Cadastrar propriedade"} aberto={abrirModal} aoFechar={() => aoFechar()} className='modalEditarPropriedade'>
         <InputTexto label='Nome' value={name} onChange={(e) => validandoInput(e, setName, Max100Caracteres)} controlador={controlName} mensagemErro={mensagemErroName} submitOcorreu={submitOcorreu} />
         <div className="descricao">
           <TextoArea value={description} onChange={(e) => setDescription(e.target.value)} label='Descrição' controlador={controlDescription} submitOcorreu={submitOcorreu} />
@@ -454,13 +517,18 @@ const MinhasPropriedades = () => {
             <InputTexto value={city} controlador={controlCity} submitOcorreu={submitOcorreu} onChange={(e) => validandoInput(e, setCity, Max255Caracteres)} label='Cidade' />
           </div>
           <div className="col-6">
-            <SelectTipo tipo={state} onChange={(e) => setState(e.target.value)} label="Estado" className='selectMargem' temLabel>
+            <SelectTipo tipo={state} onChange={(e) => setState(e.target.value)} label="Estado" temLabel>
               {estadosBrasil.map((estado) => (
                 <option value={estado}>{estado}</option>
               ))}
             </SelectTipo>
           </div>
         </div>
+
+       {!isAtualizar &&  <InputArquivo onChange={handleFileChange} controlador={controlImage} submitOcorreu={submitOcorreu} />}
+        {/* <div className="image-preview">
+          <img src={imagePreview} alt="" />
+        </div> */}
         <Botao onClick={atualizarOuCadastrarPropriedade}>
           {isAtualizar ? `Atualizar` : `Adicionar`}
         </Botao>

@@ -6,9 +6,10 @@ type Props = {
   aoFechar: () => void;
   children: React.ReactNode;
   className?: string
+  titulo?: string
 };
 
-function ModalPadrao({ aberto, aoFechar, children, className }: Props) {
+function ModalPadrao({ aberto, aoFechar, children, className, titulo }: Props) {
   if (!aberto) return null;
 
   return (
@@ -17,7 +18,7 @@ function ModalPadrao({ aberto, aoFechar, children, className }: Props) {
         <button className="modal-fechar" onClick={aoFechar}>
           <IoClose />
         </button>
-
+        {titulo && <h4>{titulo}</h4>}
         {children}
       </div>
     </div>
