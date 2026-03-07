@@ -41,7 +41,6 @@ const MinhasPropriedades = () => {
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("AC");
   const [image, setImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>("");
   const [isAtualizar, setIsAtualizar] = useState<boolean>();
 
 
@@ -85,7 +84,6 @@ const MinhasPropriedades = () => {
       setAddress(response.address)
       setState(response.state)
       setCity(response.city)
-      setImagePreview(response.imageUrls)
 
 
       setLoading(false)
@@ -168,7 +166,6 @@ const MinhasPropriedades = () => {
     setState("AC")
     setCity("")
     setImage(null)
-    setImagePreview("")
 
   }
 
