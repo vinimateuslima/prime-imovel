@@ -8,6 +8,8 @@ import FavoritosUsuario from "../../features/components/FavoritosUsuario/Favorit
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../contexts/LoadingContext";
 import CadastrarUsuario from "../../features/components/CadastrarUsuario/CadastrarUsuario";
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
+import { IoCreateOutline } from "react-icons/io5";
 
 const AbasPerfil = () => {
 
@@ -49,6 +51,7 @@ const AbasPerfil = () => {
                     className={`abasBotao ${abaAtiva === "perfil" ? "active" : ""}`}
 
                 >
+                    <FaRegUser />
                     Meu Perfil
                 </button>
 
@@ -58,6 +61,7 @@ const AbasPerfil = () => {
 
 
                 >
+                    <FaRegHeart />
                     Favoritos
                 </button>
 
@@ -67,6 +71,7 @@ const AbasPerfil = () => {
 
 
                 >
+                    <IoCreateOutline />
                     Cadastrar Usuário
                 </button>}
 
