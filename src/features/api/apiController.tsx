@@ -83,6 +83,16 @@ class ApiController {
       headers: this.getHeaders(),
     });
 
+
+
+    return response.data;
+  }
+
+  async patch(route: string, body?: object) {
+    const response = await api.patch(route, body, {
+      headers: this.getHeaders(),
+    });
+
     return response.data;
   }
 }

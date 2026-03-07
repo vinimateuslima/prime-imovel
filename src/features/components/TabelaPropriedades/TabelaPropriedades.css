@@ -54,3 +54,7 @@
 .excluir {
     color: #4b5563;
 }
+
+.switchStatus input{
+    cursor: pointer;
+}

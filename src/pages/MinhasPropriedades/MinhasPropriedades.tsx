@@ -37,8 +37,10 @@ const MinhasPropriedades = () => {
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("");
+  const [trocarStatus, setTrocarStatus] = useState<boolean>();
 
-  const [selectEstados, setSelectEstados] = useState<string[]>();
+  const [isAdmin, setIsAdmin] = useState<boolean>();
+
 
   function aoEditar(id: number) {
     setLoading(true)
@@ -132,11 +134,48 @@ const MinhasPropriedades = () => {
     setCity("")
   }
 
-  function buscarPropriedadesUsuario() {
-    setLoading(true)
-    apiController.get(`/property/getUserProperties`).then((response) => {
+  async function buscarPropriedadesUsuario() {
 
-      setPropriedades(response)
+    setLoading(true)
+
+    let tipoUsuario: any
+
+    let path = "/property/getUserProperties"
+
+    await apiController.get(`/user`).then((response) => {
+
+      tipoUsuario = response.role
+
+      console.log("usuario role ", response.role);
+      console.log("usuario 2 ", tipoUsuario == "ADMIN");
+
+    }).catch((error) => {
+      setLoading(false)
+      console.log(error.message);
+
+    })
+
+    console.log("usuario 3 ", tipoUsuario);
+
+    if (tipoUsuario == "ADMIN") {
+      console.log("passou");
+
+      path = "/property"
+    }
+
+    console.log("path ", path);
+
+
+    apiController.get(path).then((response) => {
+
+      if (tipoUsuario == "ADMIN") {
+        setPropriedades(response.content)
+        setIsAdmin(true)
+      } else {
+        setIsAdmin(false)
+        setPropriedades(response)
+      }
+
       setLoading(false)
 
     }).catch((error) => {
@@ -205,6 +244,52 @@ const MinhasPropriedades = () => {
 
   }
 
+  function aoTrocarStatus(id: number, statusAtual: boolean) {
+    console.log("Id ", id);
+    console.log("Status Atual ", statusAtual);
+
+    Swal.fire({
+      title: `Tem certeza que deseja ${statusAtual ? `desativar` : `ativar`} a propriedade?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Não",
+      confirmButtonColor: "#C9A227",
+      cancelButtonColor: "#0F172A"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setLoading(true)
+        apiController.patch(`/property/status/${id}`).then((response) => {
+
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Status da propriedade atualizado com sucesso!',
+            icon: 'success',
+            confirmButtonColor: '#C9A227',
+            confirmButtonText: 'OK'
+          });
+
+          setLoading(false)
+          buscarPropriedadesUsuario()
+
+        }).catch((error) => {
+          setLoading(false)
+          console.log(error.message);
+          Swal.fire({
+            icon: "error",
+            title: "Opa",
+            text: `${error.response.data.message}`,
+
+          });
+        })
+
+
+      }
+
+    })
+
+  }
+
   useEffect(() => {
     buscarPropriedadesUsuario()
   }, [])
@@ -217,7 +302,7 @@ const MinhasPropriedades = () => {
     <>
       <div className=" container mt-5 mb-5">
         <h2 className='mb-4'>Minhas Propriedades</h2>
-        <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={aoExcluir} />
+        <TabelaPropriedades propriedades={propriedades || []} aoEditar={aoEditar} aoExcluir={aoExcluir} aoTrocarStatus={aoTrocarStatus} isAdmin={isAdmin}/>
       </div>
 
       <ModalPadrao aberto={abrirModal} aoFechar={() => aoFechar()} className='modalEditarPropriedade'>
