@@ -324,7 +324,7 @@ const Home = () => {
             <CardImovel
               key={propriedade.id}
               propriedade={propriedade}
-              link={`/detalhes?id=${propriedade.id}`}
+              link={`/detalhes/${propriedade.id}`}
               aoFavoritar={aoFavoritar}
               desFavoritar={desFavoritar}
             />

@@ -1,19 +1,17 @@
-import { CiLocationOn } from 'react-icons/ci'
-import './Detalhes.css'
-import { MdOutlineBed } from 'react-icons/md'
-import { LuMaximize } from 'react-icons/lu'
-import Botao from '../../features/components/Botao/Botao'
-import { FaRegHeart } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
-import type { Propriedade } from '../Home/Home'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { apiController } from '../../features/api/apiController'
+import { CiLocationOn } from 'react-icons/ci'
+import { FaRegHeart } from 'react-icons/fa'
 import { IoArrowBack } from 'react-icons/io5'
+import { LuMaximize } from 'react-icons/lu'
+import { MdOutlineBed } from 'react-icons/md'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useLoading } from '../../contexts/LoadingContext'
+import { apiController } from '../../features/api/apiController'
+import Botao from '../../features/components/Botao/Botao'
+import type { Propriedade } from '../Home/Home'
+import './Detalhes.css'
 
 const Detalhes = () => {
-
-    const [searchParams] = useSearchParams();
     const { setLoading } = useLoading();
 
     // Ferramentas
@@ -21,15 +19,14 @@ const Detalhes = () => {
 
     const [propriedade, setPropriedade] = useState<Propriedade>()
 
+    const { id } = useParams();
+
     function buscarPropriedade() {
-
-        const id = searchParams.get("id");
-
 
         if (id) {
             setLoading(true)
             apiController.get(`/property/${id}`).then((response => {
-  
+
                 setPropriedade(response)
                 setLoading(false)
 
@@ -62,7 +59,7 @@ const Detalhes = () => {
                         <div className="tipo-status d-flex justify-content-between">
                             <span className='tipo'>{propriedade.type}</span>
                             <span className={`status ${propriedade.active ? "tag-ativo" : "tag-inativo"}`}
->
+                            >
                                 {propriedade.active ? "Ativo" : "Inativo"}
                             </span>
                         </div>

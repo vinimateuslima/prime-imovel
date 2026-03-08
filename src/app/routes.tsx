@@ -15,7 +15,7 @@ export function AppRoutes() {
             <Route element={<Layout />}>
                 <Route element={<PrivateRoute />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/detalhes" element={<Detalhes />} />
+                    <Route path="/detalhes/:id" element={<Detalhes />} />
                     <Route path="/minhas-propriedades" element={<MinhasPropriedades />} />
                     <Route path="/minha-conta" element={<MinhaConta />} />
                 </Route>
