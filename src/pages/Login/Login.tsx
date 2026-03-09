@@ -96,6 +96,12 @@ const Login = () => {
     }
   }
 
+  function aoPressionarEnter(e: React.KeyboardEvent) {
+    if (e.key === "Enter") {
+      Login()
+    }
+  };
+
 
   useEffect(() => {
     validandoInputVazioEMinimoEmail(email, setControlEmail, setMensagemErroEmail)
@@ -114,25 +120,25 @@ const Login = () => {
 
   return (
 
-    <div className="container">
+    <div className="container" onKeyDown={aoPressionarEnter}>
       <div className="login text-center row justify-content-center align-items-center login-container">
-      <div className="col-12 d-flex justify-content-center">
+        <div className="col-12 d-flex justify-content-center">
 
-        <FormBasico title='Login' description='Faça login para acessar sua conta'>
-          <div className="form-login-group">
-            {/* <CiMail className='icon' /> */}
-            <InputTexto label='E-mail' value={email} onChange={(e) => validandoInput(e, setEmail, Max255Caracteres)} placeholder='seu@email.com' controlador={controlEmail} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroEmail} />
-          </div>
-          <div className="form-login-group">
-            {/* <IoLockClosedOutline className='icon' /> */}
-            <InputSenha label='Senha' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} placeholder='Digite sua senha' controlador={controlPassword} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroPassword} esqueceuSenhaLink />
-          </div>
-          <Botao type='button' onClick={Login}> Entrar</Botao>
-          <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
-        </FormBasico>
+          <FormBasico title='Login' description='Faça login para acessar sua conta'>
+            <div className="form-login-group">
+              {/* <CiMail className='icon' /> */}
+              <InputTexto label='E-mail' value={email} onChange={(e) => validandoInput(e, setEmail, Max255Caracteres)} placeholder='seu@email.com' controlador={controlEmail} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroEmail} />
+            </div>
+            <div className="form-login-group">
+              {/* <IoLockClosedOutline className='icon' /> */}
+              <InputSenha label='Senha' value={password} onChange={(e) => validandoInput(e, setPassword, Max2147483647Caracteres)} placeholder='Digite sua senha' controlador={controlPassword} obrigatorio submitOcorreu={submitOcorreu} mensagemErro={mensagemErroPassword} />
+            </div>
+            <Botao type='button' onClick={Login}> Entrar</Botao>
+            <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+          </FormBasico>
 
+        </div>
       </div>
-    </div>
     </div>
   )
 }

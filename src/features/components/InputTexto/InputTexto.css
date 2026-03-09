@@ -4,13 +4,13 @@
 
 }
 
-.label-container{
+.label-container {
     display: flex;
     gap: 5px;
     text-align: left;
 }
 
-.label-container label{
+.label-container label {
     display: flex;
     gap: 5px;
     text-align: left;
@@ -23,6 +23,10 @@
     color: #E74C3C;
     font-size: 12px;
     margin-top: 4px;
+}
+
+.texto-obrigatorio-container {
+    text-align: left;
 }
 
 .inputTexto {
