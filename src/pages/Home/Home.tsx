@@ -166,10 +166,16 @@ const Home = () => {
 
   }
 
-  function listarImoveis() {
+  function listarImoveis(limpar?:boolean) {
 
+    let query;
 
-    const query = `?sort=id&page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
+    query = `?sort=id&page=${page}&size=${size}&name=${nome}&type=${tipo}&minPrice=${precoMin}&maxPrice=${precoMax}&minBedrooms=${quartos}`
+
+    if (limpar) {
+      query = `?sort=id&page=0&size=10`
+    }
+
 
     console.log("Query ", query);
 
@@ -249,7 +255,7 @@ const Home = () => {
     setPrecoMax("")
     setQuartos("")
     setSearchParams({ sort: "id", page: "0", size: "10" })
-    listarImoveis()
+    listarImoveis(true)
   }
 
   useEffect(() => {

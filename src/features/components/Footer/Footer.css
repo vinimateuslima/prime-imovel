@@ -1,0 +1,13 @@
+footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #cecdcd;
+    text-align: center;
+}
+
+footer a{
+    color: #000000!important;
+}
