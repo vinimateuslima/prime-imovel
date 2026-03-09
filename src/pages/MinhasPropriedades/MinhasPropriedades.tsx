@@ -511,7 +511,7 @@ const MinhasPropriedades = () => {
             </SelectTipo>
           </div>
           <div className="col-6">
-            <InputTexto controlador={controlValue} submitOcorreu={submitOcorreu} value={value} onChange={(e) => formatarValor(e, setValue)} label='Valor' isMoeda />
+            <InputTexto controlador={controlValue} className='mb-3' submitOcorreu={submitOcorreu} value={value} onChange={(e) => formatarValor(e, setValue)} label='Valor' isMoeda />
           </div>
         </div>
 
